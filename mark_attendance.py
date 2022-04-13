@@ -89,7 +89,7 @@ def updateAttendance(l, t): #'l' contains id's of students in a set and 't' cont
     
     find = {
         f"{date}": {
-            "$exists": False
+            "$exists": True
         }
     }
 
@@ -104,6 +104,16 @@ def updateAttendance(l, t): #'l' contains id's of students in a set and 't' cont
             break
 
     #read list of students 'l'
+
+    find = {}
+
+    up = {
+        "$set": {
+            f"{date}.{P}": "0"
+        }
+    }
+
+    x = coll[0].update_many(find, up) 
 
     for _ in l:
         find = {
